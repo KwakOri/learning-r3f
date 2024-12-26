@@ -1,45 +1,65 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import Card from "./components/Card";
+import Frame from "./components/Frame";
+
+export interface CardDataTypes {
+  imageUrl: string;
+  position: [number, number, number];
+  rotationY: number;
+  rotationZ: number;
+}
+
+const cardData: CardDataTypes[] = [
+  {
+    imageUrl: "/images/tarrot_01.png",
+    position: [0, -1, 0],
+    rotationY: -10,
+    rotationZ: 0,
+  },
+  {
+    imageUrl: "/images/tarrot_02.png",
+    position: [0.5, -1.05, -0.1],
+    rotationY: -10,
+    rotationZ: -10,
+  },
+  {
+    imageUrl: "/images/tarrot_03.png",
+    position: [-0.5, -1.05, 0.1],
+    rotationY: -10,
+    rotationZ: 10,
+  },
+  {
+    imageUrl: "/images/tarrot_04.png",
+    position: [-1, -1.15, 0.2],
+    rotationY: -10,
+    rotationZ: 20,
+  },
+  {
+    imageUrl: "/images/tarrot_05.png",
+    position: [1, -1.15, -0.1],
+    rotationY: -10,
+    rotationZ: -20,
+  },
+];
 
 function App() {
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Frame>
       <Canvas
         camera={{
-          position: [3, 3, 3],
+          position: [0, 2, 4],
         }}
       >
         <OrbitControls />
-        <axesHelper />
-        <directionalLight intensity={2} position={[3, 10, 3]} />
-        <mesh position={[-1, 0.5, 1]}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color={"red"} />
-        </mesh>
-        <mesh position={[4, 0.5, 3]}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color={"blue"} />
-        </mesh>
-        <mesh position={[-2, 0.5, -3]}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color={"green"} />
-        </mesh>
-        <gridHelper args={[10, 20]} />
+        <directionalLight intensity={0.7} position={[3, 3, -3]} />
+        <directionalLight intensity={4} position={[4, 1, 4]} />
+
+        {cardData.map((props) => (
+          <Card {...props} />
+        ))}
       </Canvas>
-    </div>
+    </Frame>
   );
 }
 
