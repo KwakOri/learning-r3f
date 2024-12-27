@@ -49,11 +49,7 @@ const Card = ({
 
   const getSpringProps = (isHover: boolean): SpringProps => {
     return {
-      position: [
-        position.x,
-        isHover ? position.y + 0.5 : position.y,
-        position.z,
-      ],
+      position: [position.x, isHover ? position.y + 1 : position.y, position.z],
       "rotation-x": 0,
       "rotation-y": THREE.MathUtils.degToRad(
         (isClicked ? 180 : 0) +
